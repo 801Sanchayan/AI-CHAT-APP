@@ -2,6 +2,19 @@
 
 A minimal Android app built with Kotlin + Jetpack Compose that works fully offline.
 
+## Features
+- Local chat UI
+- No network permissions required
+- Simple on-device rule-based assistant (`localReply`)
+- Easy extension point for a real on-device LLM
+
+## Run
+1. Open this folder in Android Studio (Ladybug or newer).
+2. Let Gradle sync.
+3. Run `app` on an emulator/device.
+
+## Upgrade to real offline AI
+Replace `localReply()` in `ChatViewModel` with an on-device inference library such as:
 ## What this app does
 - Local chat UI (no backend).
 - No network permission in `AndroidManifest.xml`.
@@ -47,12 +60,4 @@ Replace `localReply()` in `app/src/main/java/com/example/offlineaichat/MainActiv
 - llama.cpp Android bindings
 - ONNX Runtime Mobile
 
-Then:
-1. Place your quantized model in assets or app-private storage.
-2. Run inference on a background coroutine/thread.
-3. Stream partial tokens into the UI for real-time chat updates.
-
-## Current project structure
-- `app/src/main/java/com/example/offlineaichat/MainActivity.kt` — UI + ViewModel + local responder
-- `app/build.gradle.kts` — Android/Compose config
-- `settings.gradle.kts`, `build.gradle.kts`, `gradle.properties` — root Gradle config
+Then load a local quantized model from app storage/assets and stream tokens into the chat.
